@@ -6,61 +6,61 @@ var response = {};
 
 //10 employees loaded on page load
 var employee = [{
-		id: 1,
+		id: 51680756,
 		firstName: 'Sanjai',
 		lastName: 'kumar',
 		email: 'sanjaikumars@hcl.com',
 		position: 'Consultant'
 	},{
-		id: 2,
+		id: 51680752,
 		firstName: 'Suresh',
 		lastName: 'kumar',
 		email: 'sureshkumars@hcl.com',
 		position: 'Associate-Consultant'
 	},{
-		id: 3,
+		id: 51680753,
 		firstName: 'Mahesh',
 		lastName: 'jeyagopal',
 		email: 'maheshjeyagopal@hcl.com',
 		position: 'Senior-Consultant'
 	},{
-		id: 4,
+		id: 51680766,
 		firstName: 'Rajesh',
 		lastName: 'kumar',
 		email: 'rajeshjekumar@hcl.com',
 		position: 'Senior-Consultant'
 	},{
-		id: 5,
+		id: 51680755,
 		firstName: 'Anitha',
 		lastName: 'jeyagopal',
 		email: 'anithajeyagopal@hcl.com',
 		position: 'Consultant'
 	},{
-		id: 6,
+		id: 51680556,
 		firstName: 'Deepika',
 		lastName: 'gayathri',
 		email: 'deepikagayathri@hcl.com',
 		position: 'Senior-Consultant'
 	},{
-		id: 7,
+		id: 51680757,
 		firstName: 'Sathish',
 		lastName: 'kumar',
 		email: 'sathishkumar@hcl.com',
 		position: 'Tech-Lead'
 	},{
-		id: 8,
+		id: 51680758,
 		firstName: 'Srini',
 		lastName: 'vasan',
 		email: 'srinivasan@hcl.com',
 		position: 'Architech'
 	},{
-		id: 9,
+		id: 51680759,
 		firstName: 'Ritesh',
 		lastName: 'sagar',
 		email: 'riteshsagar@hcl.com',
 		position: 'Associate-Consultant'
 	},{
-		id: 10,
+		id: 51680750,
 		firstName: 'Rajesh',
 		lastName: 'jeyagopal',
 		email: 'rajeshjeyagopal@hcl.com',
@@ -84,14 +84,65 @@ app.get('/todolist', function (req, res) {
 });
 
 /**
+ * Add Employee
+ */
+app.post('/add', function (req, res) {
+	employee.push(req.body);
+	res.send({ data : employee });
+});
+
+/**
+ * Delete Employee
+ */
+app.get('/delete/:id', function (req, res) {
+	var response = req.params.id;
+	for(var i=0; i<employee.length; i++) {
+		if(employee[i].id == response) {
+			employee.splice( i, 1 );
+		}
+	}
+	res.send({ data : employee });
+});
+
+/**
+ * Retrieve Employee
+ */
+app.get('/retrieve/:id', function (req, res) {
+	var response = req.params.id;
+	var editEmployee = [];
+	console.log(response);
+	console.log('ddddddddddddddddddddddd' +response);
+	for(var i=0; i<employee.length; i++) {
+		if(employee[i].id == response) {
+			editEmployee.push(employee[i]);
+		}
+	}
+	res.send({ data : editEmployee });
+});
+
+/**
+ * Modify Employee
+ */
+app.post('/modify', function (req, res) {
+	var response = req.body;
+	for(var i=0; i<employee.length; i++) {
+		if(employee[i].id == response.id) {
+			employee[i] = response;
+		}
+	}
+	res.send({ message : 'success' });
+});
+
+/**
  * Login
  */
 app.post('/login', function (req, res) {
 	response = req.body;
-	console.log('responseresponseresponseresponseresponse' +response);
-	console.log('responseresponseresponseresponseresponse' +response.userName);
-	console.log('responseresponseresponseresponseresponse' +response.password);
-	res.send({ message : 'success' });
+	if(response.userName === 'admin' && response.password === 'admin') {
+		res.send({ message : 'success' });
+	} else {
+		res.send({ message : 'error' });
+	}
 });
 
 

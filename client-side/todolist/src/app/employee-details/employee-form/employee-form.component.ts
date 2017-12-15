@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from "@angular/common/http";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: 'app-employee-form',
@@ -31,9 +31,12 @@ export class EmployeeFormComponent implements OnInit {
    * @param http
    */
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private activatedRoute: ActivatedRoute) {
+  constructor(private formBuilder: FormBuilder,
+    private http: HttpClient,
+    private activatedRoute: ActivatedRoute,
+    private router: Router) {
     this.employeeForm = this.formBuilder.group({
-      'sapId': ['', Validators.required],
+      'id': ['', Validators.required],
       'firstName': ['', Validators.required],
       'lastName': ['', Validators.required],
       'email': ['', Validators.required],
@@ -42,7 +45,8 @@ export class EmployeeFormComponent implements OnInit {
 
     this.activatedRoute.params.subscribe( params => this.params = params );
     if(this.params.id) {
-      this.buttonLabel = 'Edit'
+      this.buttonLabel = 'Edit';
+      this.retriveEmployeeDetails(this.params.id);
     } else {      
       this.buttonLabel = 'Add'
     }
@@ -52,8 +56,31 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   public submit() {
-    this.http.post('http://localhost:3000/login', this.employeeForm.value).subscribe(
-      (data) =>  {debugger}
+    if (this.buttonLabel === 'Add') {
+    this.http.post('http://localhost:3000/add', this.employeeForm.value).subscribe(
+      (data) =>  {
+        this.router.navigate(['list']);
+      }
     ) 
+    } else {
+    this.http.post('http://localhost:3000/modify/', this.employeeForm.value).subscribe(
+      (data) =>  {
+        this.router.navigate(['list']);
+      }
+    )
+
+    }
+  }
+
+  public retriveEmployeeDetails(id) {
+    this.http.get('http://localhost:3000/retrieve/'+id, this.employeeForm.value).subscribe(
+      (data:any) =>  {
+       this.employeeForm.id = data.data[0].id;
+       this.employeeForm.firstName = data.data[0].firstName;
+       this.employeeForm.lastName = data.data[0].lastName;
+       this.employeeForm.email = data.data[0].email;
+       this.employeeForm.position = data.data[0].position;
+      }
+    )
   }
 }

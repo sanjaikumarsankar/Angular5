@@ -34,11 +34,14 @@ export class LoginComponent implements OnInit {
   }
 
   public login() {
-    /*let header = new Headers();
-    header.append('Access-Control-Allow-Origin','*');
     this.http.post('http://localhost:3000/login', this.loginForm.value).subscribe(
-      (data) =>  {debugger}
-    ) */
-    this.router.navigate(['list']);
+      (data: any) =>  {
+        if (data.message === 'success') {
+          this.router.navigate(['list']);
+        } else {
+          alert('username and password incorrect');
+        }
+      }
+    )
   }
 }

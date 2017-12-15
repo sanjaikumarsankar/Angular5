@@ -2,15 +2,15 @@
 	<h1>{{buttonLabel}} Employee</h1>
     <form [formGroup]="employeeForm" (submit)="submit()">
       <label> SAP ID </label>
-    	<input type="text" formControlName="sapId" id="sapId"/>
+    	<input type="text" formControlName="id" id="id" [(ngModel)]="employeeForm.id"/>
       <label> First Name </label>
-        <input type="password" formControlName="firstName" id="firstName"/>
+        <input type="password" formControlName="firstName" id="firstName" [(ngModel)]="employeeForm.firstName"/>
       <label> Last Name </label>
-    	<input type="text" formControlName="lastName" id="lastName"/>
+    	<input type="text" formControlName="lastName" id="lastName" [(ngModel)]="employeeForm.lastName"/>
       <label> Email </label>
-    	<input type="text" formControlName="email" id="email"/>
+    	<input type="text" formControlName="email" id="email" [(ngModel)]="employeeForm.email"/>
       <label> Position </label>
-    	<input type="text" formControlName="position" id="position"/>
+    	<input type="text" formControlName="position" id="position" [(ngModel)]="employeeForm.position"/>
         <button type="submit" [disabled]="!employeeForm.valid" class="btn btn-primary btn-block btn-large" >{{buttonLabel}}</button>
     </form>
 </div>
