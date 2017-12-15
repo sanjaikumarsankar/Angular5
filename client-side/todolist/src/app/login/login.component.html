@@ -1,9 +1,11 @@
-
-  <div class="login">
-	<h1>Login</h1>
-    <form [formGroup]="loginForm" (submit)="login()">
-    	<input type="text" formControlName="userName" id="userName" placeholder="Username"/>
-        <input type="password" formControlName="password" id="password" placeholder="Password"/>
-        <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary btn-block btn-large" >Let me in.</button>
-    </form>
+<div class="container-fluid loginForm">
+<form [formGroup]="loginForm" (submit)="login()">
+    <div class="form-group">
+        <label for="userName ">User Name</label>
+        <input type="text"  class="form-control" formControlName="userName" id="userName" placeholder="UserName"/>
+        <label for="password">Password</label>
+        <input type="password" class="form-control" formControlName="password" id="password" placeholder="Password" placeholder="Password"/>
+    </div>
+    <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary loginBtn" >Login</button>
+</form>
 </div>

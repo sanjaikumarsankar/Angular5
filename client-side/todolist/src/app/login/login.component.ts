@@ -30,9 +30,15 @@ export class LoginComponent implements OnInit {
     })
   }
 
+  /*
+  * OnInit
+  */
   ngOnInit() {
   }
 
+  /*
+  * Login button
+  */
   public login() {
     this.http.post('http://localhost:3000/login', this.loginForm.value).subscribe(
       (data: any) =>  {

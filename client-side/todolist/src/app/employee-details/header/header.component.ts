@@ -15,11 +15,16 @@ export class HeaderComponent implements OnInit {
 
   constructor(public router: Router) { }
 
+  /*
+  * ngOnInit
+  */
   ngOnInit() {
   }
 
+  /*
+  * logout
+  */
   public logout() {
-    console.log('logout');
     this.router.navigate(['login']);
   }
 

@@ -48,13 +48,19 @@ export class EmployeeFormComponent implements OnInit {
       this.buttonLabel = 'Edit';
       this.retriveEmployeeDetails(this.params.id);
     } else {      
-      this.buttonLabel = 'Add'
+      this.buttonLabel = 'Add';
     }
    }
 
+  /*
+  * ngOnInit
+  */
   ngOnInit() {
   }
 
+  /*
+  * submit
+  */
   public submit() {
     if (this.buttonLabel === 'Add') {
     this.http.post('http://localhost:3000/add', this.employeeForm.value).subscribe(
@@ -72,6 +78,9 @@ export class EmployeeFormComponent implements OnInit {
     }
   }
 
+  /*
+  * retriveEmployeeDetails
+  */
   public retriveEmployeeDetails(id) {
     this.http.get('http://localhost:3000/retrieve/'+id, this.employeeForm.value).subscribe(
       (data:any) =>  {
