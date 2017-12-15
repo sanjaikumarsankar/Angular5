@@ -79,7 +79,6 @@ app.use(express.static(__dirname));
  */
 app.get('/todolist', function (req, res) {
 	res.header("Access-Control-Allow-Origin", "*");
-    response = {};
 	res.send({ data : employee });
 });
 
@@ -110,8 +109,6 @@ app.get('/delete/:id', function (req, res) {
 app.get('/retrieve/:id', function (req, res) {
 	var response = req.params.id;
 	var editEmployee = [];
-	console.log(response);
-	console.log('ddddddddddddddddddddddd' +response);
 	for(var i=0; i<employee.length; i++) {
 		if(employee[i].id == response) {
 			editEmployee.push(employee[i]);
