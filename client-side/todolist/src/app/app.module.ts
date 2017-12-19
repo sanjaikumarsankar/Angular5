@@ -11,13 +11,15 @@ import { EmployeeDetailsComponent } from './employee-details/employee-details.co
 import { EmployeeListComponent } from './employee-details/employee-list/employee-list.component';
 import { HeaderComponent } from './employee-details/header/header.component';
 import { EmployeeFormComponent } from './employee-details/employee-form/employee-form.component';
+import { UserAttemptComponent } from './user-attempt/user-attempt.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'list', component: EmployeeDetailsComponent },
   { path: 'add', component: EmployeeFormComponent },
-  { path: 'edit/:id', component: EmployeeFormComponent }
+  { path: 'edit/:id', component: EmployeeFormComponent },
+  { path: 'attempt', component: UserAttemptComponent }
 ];
 
 @NgModule({
@@ -27,12 +29,14 @@ const routes: Routes = [
     EmployeeDetailsComponent,
     EmployeeListComponent,
     HeaderComponent,
-    EmployeeFormComponent
+    EmployeeFormComponent,
+    UserAttemptComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
     RouterModule.forRoot(routes)
   ],
   exports: [ RouterModule ],
